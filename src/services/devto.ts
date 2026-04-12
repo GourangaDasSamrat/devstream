@@ -1,7 +1,7 @@
 import type { DevToArticle } from "../types";
 
 const BASE_URL = "https://dev.to/api";
-const USERNAME = import.meta.env.VITE_DEVTO_USERNAME as string;
+const USERNAME = import.meta.env.VITE_DEVTO_USERNAME;
 
 export const devtoApi = {
   async getArticles(): Promise<DevToArticle[]> {
