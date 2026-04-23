@@ -415,8 +415,6 @@ export const BlogModal: React.FC = () => {
               </div>
             )}
 
-
-
             {/* Fallback description */}
             {!loading && !fullArticle?.body_markdown && !error && (
               <p

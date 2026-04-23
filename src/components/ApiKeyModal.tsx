@@ -1,9 +1,6 @@
 import { AlertCircle, Loader2, Trash2, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import {
-    summarizeWithGemini,
-    validateGeminiApiKey,
-} from "../services/gemini";
+import { summarizeWithGemini, validateGeminiApiKey } from "../services/gemini";
 
 interface ApiKeyModalProps {
   open: boolean;
@@ -48,7 +45,9 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
       // First validate the API key
       const validation = await validateGeminiApiKey(apiKey);
       if (!validation.valid) {
-        setError(validation.error || "Invalid API key. Please add a new API key.");
+        setError(
+          validation.error || "Invalid API key. Please add a new API key.",
+        );
         setValidating(false);
         return;
       }
@@ -58,7 +57,10 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
       const result = await summarizeWithGemini(apiKey, articleContent);
 
       if (!result.success) {
-        setError(result.error || "Failed to generate summary. Please add a new API key.");
+        setError(
+          result.error ||
+            "Failed to generate summary. Please add a new API key.",
+        );
         setLoading(false);
         setValidating(false);
         return;
@@ -72,7 +74,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
       onClose();
     } catch (err) {
       setError(
-        `Error: ${err instanceof Error ? err.message : "Unknown error occurred"}`
+        `Error: ${err instanceof Error ? err.message : "Unknown error occurred"}`,
       );
     } finally {
       setLoading(false);
@@ -275,9 +277,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 marginBottom: 20,
               }}
             >
-              <span>
-                ✓ Saved API key loaded (you can change it above)
-              </span>
+              <span>✓ Saved API key loaded (you can change it above)</span>
               <button
                 onClick={handleClearSavedKey}
                 style={{
@@ -295,10 +295,12 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                   transition: "all 0.15s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#a2d2ff22";
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                    "#a2d2ff22";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "transparent";
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                    "transparent";
                 }}
                 title="Clear saved API key"
               >
@@ -310,7 +312,13 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
 
           {/* Help Link */}
           <div style={{ marginBottom: 20 }}>
-            <p style={{ fontSize: 12, color: "var(--muted)", margin: "0 0 8px 0" }}>
+            <p
+              style={{
+                fontSize: 12,
+                color: "var(--muted)",
+                margin: "0 0 8px 0",
+              }}
+            >
               Don't have an API key?{" "}
               <a
                 href="https://aistudio.google.com/apikey"
@@ -329,7 +337,8 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                     "underline";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "#a2d2ff";
+                  (e.currentTarget as HTMLAnchorElement).style.color =
+                    "#a2d2ff";
                   (e.currentTarget as HTMLAnchorElement).style.textDecoration =
                     "none";
                 }}
@@ -337,7 +346,13 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 Get API key
               </a>
             </p>
-            <p style={{ fontSize: 12, color: "var(--muted)", margin: "0 0 8px 0" }}>
+            <p
+              style={{
+                fontSize: 12,
+                color: "var(--muted)",
+                margin: "0 0 8px 0",
+              }}
+            >
               <a
                 href="https://ai.google.dev/gemini-api/docs"
                 target="_blank"
@@ -355,7 +370,8 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                     "underline";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "#a2d2ff";
+                  (e.currentTarget as HTMLAnchorElement).style.color =
+                    "#a2d2ff";
                   (e.currentTarget as HTMLAnchorElement).style.textDecoration =
                     "none";
                 }}
@@ -420,8 +436,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
-                opacity:
-                  !apiKey.trim() || loading || validating ? 0.5 : 1,
+                opacity: !apiKey.trim() || loading || validating ? 0.5 : 1,
               }}
               onMouseEnter={(e) => {
                 if (apiKey.trim() && !loading && !validating) {
@@ -440,7 +455,11 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                   style={{ animation: "spin 1s linear infinite" }}
                 />
               ) : null}
-              {loading ? "Summarizing..." : validating ? "Validating..." : "Generate Summary"}
+              {loading
+                ? "Summarizing..."
+                : validating
+                  ? "Validating..."
+                  : "Generate Summary"}
             </button>
           </div>
         </div>

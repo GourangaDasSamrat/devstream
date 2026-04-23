@@ -1,4 +1,5 @@
-const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
+const GEMINI_API_BASE =
+  "https://generativelanguage.googleapis.com/v1beta/models";
 
 export interface GeminiSummaryResponse {
   summary: string;
@@ -10,7 +11,7 @@ export interface GeminiSummaryResponse {
  * Validates if the provided API key is valid by making a test call
  */
 export async function validateGeminiApiKey(
-  apiKey: string
+  apiKey: string,
 ): Promise<{ valid: boolean; error?: string }> {
   try {
     const response = await fetch(
@@ -31,7 +32,7 @@ export async function validateGeminiApiKey(
             },
           ],
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -39,7 +40,8 @@ export async function validateGeminiApiKey(
       return {
         valid: false,
         error:
-          error.error?.message || "Invalid API key. Please check and try again.",
+          error.error?.message ||
+          "Invalid API key. Please check and try again.",
       };
     }
 
@@ -57,7 +59,7 @@ export async function validateGeminiApiKey(
  */
 export async function summarizeWithGemini(
   apiKey: string,
-  content: string
+  content: string,
 ): Promise<GeminiSummaryResponse> {
   try {
     const prompt = `Please provide a concise summary of the following blog article content. The summary should be 2-3 paragraphs, capturing the main points and key takeaways:
@@ -86,7 +88,7 @@ ${content}`;
             temperature: 0.7,
           },
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -102,8 +104,7 @@ ${content}`;
 
     const data = await response.json();
     const summary =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No summary generated";
+      data.candidates?.[0]?.content?.parts?.[0]?.text || "No summary generated";
 
     return {
       success: true,
