@@ -1,20 +1,23 @@
-import React, { useEffect, useState, useCallback } from "react";
 import {
-  X,
+  AlertCircle,
+  Calendar,
+  Clock,
   ExternalLink,
   Heart,
-  MessageCircle,
-  Clock,
-  Calendar,
-  Tag,
   Loader2,
-  AlertCircle,
+  MessageCircle,
+  Sparkles,
+  Tag,
+  X,
 } from "lucide-react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useAppStore } from "../store/useAppStore";
 import { devtoApi } from "../services/devto";
+import { useAppStore } from "../store/useAppStore";
 import type { DevToArticle } from "../types";
+import { ApiKeyModal } from "./ApiKeyModal";
+import { SummaryModal } from "./SummaryModal";
 
 /** Dev.to single-article endpoint returns tag_list as a comma-separated string.
  *  This helper ensures it's always a clean string[]. */
@@ -32,6 +35,9 @@ export const BlogModal: React.FC = () => {
   const [fullArticle, setFullArticle] = useState<DevToArticle | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [apiKeyModalOpen, setApiKeyModalOpen] = useState(false);
+  const [summary, setSummary] = useState<string | null>(null);
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
 
   const fetchFull = useCallback(async (article: DevToArticle) => {
     setLoading(true);
@@ -159,6 +165,36 @@ export const BlogModal: React.FC = () => {
             )}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button
+              onClick={() => setApiKeyModalOpen(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "6px 12px",
+                borderRadius: 8,
+                border: "1px solid #cdb4db55",
+                backgroundColor: "#cdb4db18",
+                color: "#cdb4db",
+                textDecoration: "none",
+                fontSize: 11,
+                fontFamily: "JetBrains Mono",
+                fontWeight: 600,
+                transition: "all 0.15s",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                  "#cdb4db33";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+                  "#cdb4db18";
+              }}
+            >
+              <Sparkles size={11} />
+              AI Summary
+            </button>
             <a
               href={selectedArticle.url}
               target="_blank"
@@ -190,36 +226,36 @@ export const BlogModal: React.FC = () => {
               <ExternalLink size={11} />
               Open on Dev.to
             </a>
-            <button
-              onClick={closeModal}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 32,
-                height: 32,
-                borderRadius: 8,
-                border: "1px solid var(--border)",
-                backgroundColor: "var(--surface2)",
-                color: "var(--muted)",
-                cursor: "pointer",
-                transition: "all 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  "#ffafcc";
-                (e.currentTarget as HTMLButtonElement).style.color = "#ffafcc";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  "var(--border)";
-                (e.currentTarget as HTMLButtonElement).style.color =
-                  "var(--muted)";
-              }}
-            >
-              <X size={14} />
-            </button>
           </div>
+          <button
+            onClick={closeModal}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              border: "1px solid var(--border)",
+              backgroundColor: "var(--surface2)",
+              color: "var(--muted)",
+              cursor: "pointer",
+              transition: "all 0.15s",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor =
+                "#ffafcc";
+              (e.currentTarget as HTMLButtonElement).style.color = "#ffafcc";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor =
+                "var(--border)";
+              (e.currentTarget as HTMLButtonElement).style.color =
+                "var(--muted)";
+            }}
+          >
+            <X size={14} />
+          </button>
         </div>
 
         {/* Scrollable content */}
@@ -379,6 +415,8 @@ export const BlogModal: React.FC = () => {
               </div>
             )}
 
+
+
             {/* Fallback description */}
             {!loading && !fullArticle?.body_markdown && !error && (
               <p
@@ -389,6 +427,26 @@ export const BlogModal: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* API Key Modal */}
+        <ApiKeyModal
+          open={apiKeyModalOpen}
+          onClose={() => setApiKeyModalOpen(false)}
+          onSummary={(generatedSummary) => {
+            setSummary(generatedSummary);
+            setSummaryModalOpen(true);
+          }}
+          articleContent={
+            fullArticle?.body_markdown || selectedArticle?.description || ""
+          }
+        />
+
+        {/* Summary Modal */}
+        <SummaryModal
+          open={summaryModalOpen}
+          summary={summary || ""}
+          onClose={() => setSummaryModalOpen(false)}
+        />
       </div>
 
       <style>{`
