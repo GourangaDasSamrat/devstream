@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { useAppStore } from "../store/useAppStore";
 import { devtoApi } from "../services/devto";
+import { useAppStore } from "../store/useAppStore";
 import type { DevToArticle } from "../types";
 
 export function useArticles() {
@@ -16,8 +16,6 @@ export function useArticles() {
   } = useAppStore();
 
   useEffect(() => {
-    if (articles.length > 0) return; // already loaded
-
     const load = async () => {
       setLoading(true);
       setError(null);
@@ -35,8 +33,15 @@ export function useArticles() {
         setLoading(false);
       }
     };
+
+    // Always fetch fresh data on component mount
+    // This ensures latest blog is always shown
     load();
-  }, []);
+
+    // Refresh data every 5 minutes to keep it fresh
+    const interval = setInterval(load, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [setArticles, setLoading, setError, setAllTags]);
 
   // Filter + sort + search
   const filtered = useMemo<DevToArticle[]>(() => {
