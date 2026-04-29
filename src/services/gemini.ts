@@ -1,6 +1,14 @@
 const GEMINI_API_BASE =
   "https://generativelanguage.googleapis.com/v1beta/models";
 
+// Common fetch options to prevent cookie issues
+const fetchOptions: RequestInit = {
+  credentials: "omit",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
 export interface GeminiSummaryResponse {
   summary: string;
   success: boolean;
@@ -17,10 +25,8 @@ export async function validateGeminiApiKey(
     const response = await fetch(
       `${GEMINI_API_BASE}/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`,
       {
+        ...fetchOptions,
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           contents: [
             {
@@ -69,10 +75,8 @@ ${content}`;
     const response = await fetch(
       `${GEMINI_API_BASE}/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`,
       {
+        ...fetchOptions,
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           contents: [
             {
