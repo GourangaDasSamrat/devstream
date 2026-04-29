@@ -3,13 +3,9 @@ import type { DevToArticle } from "../types";
 const BASE_URL = "https://dev.to/api";
 const USERNAME = import.meta.env.VITE_DEVTO_USERNAME;
 
-// Common fetch options to prevent cookie issues and ensure fresh data
+// Common fetch options to prevent cookie issues
 const fetchOptions: RequestInit = {
   credentials: "omit",
-  headers: {
-    "Cache-Control": "no-cache, no-store, must-revalidate",
-    pragma: "no-cache",
-  },
 };
 
 export const devtoApi = {

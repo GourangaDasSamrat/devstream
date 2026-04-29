@@ -41,7 +41,7 @@ export function useArticles() {
     // Refresh data every 5 minutes to keep it fresh
     const interval = setInterval(load, 5 * 60 * 1000);
     return () => clearInterval(interval);
-  }, [setArticles, setLoading, setError, setAllTags]);
+  }, []);
 
   // Filter + sort + search
   const filtered = useMemo<DevToArticle[]>(() => {
