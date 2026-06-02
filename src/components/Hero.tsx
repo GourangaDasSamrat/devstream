@@ -111,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({ totalArticles }) => {
             lineHeight: 1.7,
           }}
         >
-          Exploring web development, open source, and the craft of building
+          Exploring software development, open source, and the craft of building
           things on the internet. Published on{" "}
           <a
             href="https://dev.to/gouranga-das-khulna"
