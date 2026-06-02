@@ -1,6 +1,6 @@
-import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useAppStore } from "../store/useAppStore";
+import React from "react";
+import { useAppStore } from "../store";
 
 interface PaginationProps {
   currentPage: number;

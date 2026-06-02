@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react";
 import {
-  X,
-  ExternalLink,
-  Heart,
-  MessageCircle,
-  Clock,
-  Calendar,
-  Tag,
-  Loader2,
-  AlertCircle,
+    AlertCircle,
+    Calendar,
+    Clock,
+    ExternalLink,
+    Heart,
+    Loader2,
+    MessageCircle,
+    Tag,
+    X,
 } from "lucide-react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useAppStore } from "../store/useAppStore";
-import { devtoApi } from "../services/devto";
+import { devtoApi } from "../services";
+import { useAppStore } from "../store";
 import type { DevToArticle } from "../types";
 
 /** Dev.to single-article endpoint returns tag_list as a comma-separated string.

@@ -1,20 +1,20 @@
 import {
-  AlertCircle,
-  Calendar,
-  Clock,
-  ExternalLink,
-  Heart,
-  Loader2,
-  MessageCircle,
-  Sparkles,
-  Tag,
-  X,
+    AlertCircle,
+    Calendar,
+    Clock,
+    ExternalLink,
+    Heart,
+    Loader2,
+    MessageCircle,
+    Sparkles,
+    Tag,
+    X,
 } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { devtoApi } from "../services/devto";
-import { useAppStore } from "../store/useAppStore";
+import { devtoApi } from "../services";
+import { useAppStore } from "../store";
 import type { DevToArticle } from "../types";
 import { ApiKeyModal } from "./ApiKeyModal";
 import { SummaryModal } from "./SummaryModal";

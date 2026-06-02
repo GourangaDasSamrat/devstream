@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAppStore } from "../store/useAppStore";
+import { useAppStore } from "../store";
 import type { ThemeMode } from "../types";
 
 export function useTheme() {

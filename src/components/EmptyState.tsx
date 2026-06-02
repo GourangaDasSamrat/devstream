@@ -1,6 +1,6 @@
+import { RotateCcw, SearchX } from "lucide-react";
 import React from "react";
-import { SearchX, RotateCcw } from "lucide-react";
-import { useAppStore } from "../store/useAppStore";
+import { useAppStore } from "../store";
 
 export const EmptyState: React.FC = () => {
   const { resetFilters } = useAppStore();

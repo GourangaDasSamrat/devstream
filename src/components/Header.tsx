@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Sun, Moon, Monitor, GitFork, Link2, Rss, Menu, X } from "lucide-react";
-import { useTheme } from "../hooks/useTheme";
+import { GitFork, Link2, Monitor, Moon, Rss, Sun } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "../hooks";
 import type { ThemeMode } from "../types";
 
 const ThemeIcon = ({ theme }: { theme: ThemeMode }) => {

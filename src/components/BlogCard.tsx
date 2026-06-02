@@ -1,7 +1,7 @@
+import { Clock, ExternalLink, Eye, Heart, MessageCircle } from "lucide-react";
 import React from "react";
-import { Heart, MessageCircle, Clock, ExternalLink, Eye } from "lucide-react";
+import { useAppStore } from "../store";
 import type { DevToArticle } from "../types";
-import { useAppStore } from "../store/useAppStore";
 
 const TAG_COLORS = ["#cdb4db", "#ffc8dd", "#ffafcc", "#bde0fe", "#a2d2ff"];
 

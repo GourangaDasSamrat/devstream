@@ -1,6 +1,6 @@
+import { ChevronDown, RotateCcw, SlidersHorizontal, X } from "lucide-react";
 import React, { useState } from "react";
-import { SlidersHorizontal, ChevronDown, X, RotateCcw } from "lucide-react";
-import { useAppStore } from "../store/useAppStore";
+import { useAppStore } from "../store";
 import type { SortOption } from "../types";
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [

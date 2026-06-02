@@ -1,7 +1,7 @@
-import React, { useCallback, useRef } from "react";
 import { Search, X } from "lucide-react";
-import { useAppStore } from "../store/useAppStore";
-import { useDebouncedCallback } from "../hooks/useDebounce";
+import React, { useRef } from "react";
+import { useDebouncedCallback } from "../hooks";
+import { useAppStore } from "../store";
 
 export const SearchBar: React.FC = () => {
   const { filters, setFilters } = useAppStore();

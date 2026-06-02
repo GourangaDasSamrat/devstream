@@ -1,7 +1,7 @@
-import React from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
-import { useAppStore } from "../store/useAppStore";
-import { devtoApi } from "../services/devto";
+import React from "react";
+import { devtoApi } from "../services";
+import { useAppStore } from "../store";
 
 export const ErrorState: React.FC<{ message: string }> = ({ message }) => {
   const { setArticles, setLoading, setError, setAllTags } = useAppStore();

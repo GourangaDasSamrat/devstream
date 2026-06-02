@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
-import { devtoApi } from "../services/devto";
-import { useAppStore } from "../store/useAppStore";
+import { devtoApi } from "../services";
+import { useAppStore } from "../store";
 import type { DevToArticle } from "../types";
 
 export function useArticles() {

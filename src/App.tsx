@@ -1,18 +1,18 @@
-import React from "react";
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { SearchBar } from "./components/SearchBar";
-import { Filters } from "./components/Filters";
-import { BlogCard } from "./components/BlogCard";
-import { SkeletonCard } from "./components/SkeletonCard";
-import { Pagination } from "./components/Pagination";
-import { BlogModal } from "./components/BlogModal";
-import { EmptyState } from "./components/EmptyState";
-import { ErrorState } from "./components/ErrorState";
-import { Footer } from "./components/Footer";
-import { useArticles } from "./hooks/useArticles";
-import { useTheme } from "./hooks/useTheme";
-import { useAppStore } from "./store/useAppStore";
+import {
+  BlogCard,
+  BlogModal,
+  EmptyState,
+  ErrorState,
+  Filters,
+  Footer,
+  Header,
+  Hero,
+  Pagination,
+  SearchBar,
+  SkeletonCard,
+} from "./components";
+import { useArticles, useTheme } from "./hooks";
+import { useAppStore } from "./store";
 
 function App() {
   useTheme();

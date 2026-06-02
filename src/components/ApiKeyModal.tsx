@@ -1,6 +1,6 @@
 import { AlertCircle, Loader2, Trash2, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { summarizeWithGemini, validateGeminiApiKey } from "../services/gemini";
+import { summarizeWithGemini, validateGeminiApiKey } from "../services";
 
 interface ApiKeyModalProps {
   open: boolean;
